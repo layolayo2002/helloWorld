@@ -85,7 +85,7 @@ public class ShoppingCart {
     public int getTotalQuantity() { //business method: 總購買件數
         int sum = 0;
         for (Integer q : cart.values()) {
-            if (q != null & q > 0) {
+            if (q != null && q > 0) {
                 sum += q;
             }
         }
@@ -96,8 +96,9 @@ public class ShoppingCart {
     public double getTotalAmount() {//business method: 總購買金額
 
         double total = 0;
-        for (Product p : cart.keySet()) {
-            double amount = p.getUnitPrice() * cart.get(p);
+        for (Map.Entry<Product, Integer> entry : cart.entrySet()) {
+            Product p = entry.getKey();
+            double amount = p.getUnitPrice() * entry.getValue();
             if (member instanceof VIP && !(p instanceof Outlet)) {
                 amount = amount * (100 - ((VIP) member).getDiscount()) / 100;
             }
@@ -108,8 +109,8 @@ public class ShoppingCart {
 
     public double getOriginalTotalAmount() {
         double total = 0;
-        for (Product p : cart.keySet()) {
-            double amount = p.getUnitPrice() * cart.get(p);
+        for (Map.Entry<Product, Integer> entry : cart.entrySet()) {
+            double amount = entry.getKey().getUnitPrice() * entry.getValue();
             total += amount;
         }
         return total;
