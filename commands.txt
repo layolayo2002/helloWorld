@@ -1,0 +1,17 @@
+# Validated Build/Test/Benchmark Commands
+
+## Build Commands
+- `ant compile` - Compile project (requires build/ directory)
+- `ant clean` - Clean build products
+- `ant default` - Full build, test, javadoc (some javadoc errors exist)
+- `ant jar` - Build JAR file
+
+## Test Commands
+- `ant test` - Run unit tests
+- `ant test-single` - Run single unit test
+
+## Project Info
+- Build tool: Apache Ant 1.10.14
+- Language: Java (33 source files)
+- Size: ~3187 lines of code
+- Structure: 3 packages (entity, service, test)
