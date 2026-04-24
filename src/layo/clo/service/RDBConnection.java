@@ -21,32 +21,25 @@ public class RDBConnection {
     private static final String url = "jdbc:mysql://G-21:3306/clothing?zeroDateTimeBehavior=convertToNull";      
     private static final String userid = "root";
     private static final String pwd = "1234";
-
-    public static Connection getConnection() throws CLOException {
-//         java.net.InetAddress ip;
-//        try {
-//            ip = java.net.InetAddress.getLocalHost();
-//             String myIp = ip.getHostAddress();
-//             url="jdbc:mysql://G-21:3306/clothing?zeroDateTimeBehavior=convertToNull"; 
-//             System.out.println(url);
-//        } catch (UnknownHostException ex) {
-//            Logger.getLogger(RDBConnection.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-           
+    
+    // Static initializer to load JDBC driver once at class load time (not per connection)
+    static {
         try {
-            //1. 載入JDBC Driver
-            Class.forName(driver);            
-            try {
-                //2. 建立Connection
-                Connection connection = DriverManager.getConnection(url, userid, pwd);
-                return connection;                
-            } catch (SQLException ex) {
-                Logger.getLogger(RDBConnection.class.getName()).log(Level.SEVERE, "建立資料庫連線失敗", ex);
-                throw new CLOException("建立資料庫連線失敗", ex);
-            }
+            Class.forName(driver);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RDBConnection.class.getName()).log(Level.SEVERE, "無法載入JDBC Driver:" + driver, ex);
-            throw new CLOException("無法載入JDBC Driver:" + driver, ex);
-        }        
+            throw new ExceptionInInitializerError("Failed to load JDBC driver: " + driver);
+        }
+    }
+
+    public static Connection getConnection() throws CLOException {
+        try {
+            // Driver already loaded in static initializer - just create connection
+            Connection connection = DriverManager.getConnection(url, userid, pwd);
+            return connection;                
+        } catch (SQLException ex) {
+            Logger.getLogger(RDBConnection.class.getName()).log(Level.SEVERE, "建立資料庫連線失敗", ex);
+            throw new CLOException("建立資料庫連線失敗", ex);
+        }
     }
 }
