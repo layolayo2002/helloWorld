@@ -41,6 +41,11 @@ public class VIP extends Customer{
             System.err.println("VIP折扣必須在0~90之間");
         }        
     }
+
+    @Override
+    public String getType() {
+        return "VIP";
+    }
     
     public String getDiscountString(){
         int discount = 100-this.discount;

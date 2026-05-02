@@ -52,7 +52,7 @@ public class CustomersDAO {
             pstmt.setBoolean(10, c.getMarried());
 
             pstmt.setString(11, c.getStatus());
-            pstmt.setString(12, c.getClass().getSimpleName());
+            pstmt.setString(12, c.getType());
             if (c instanceof VIP) {
                 pstmt.setInt(13, ((VIP) c).getDiscount());
             } else {
@@ -152,7 +152,7 @@ public class CustomersDAO {
             pstmt.setString(7, c.getPhone());
             pstmt.setBoolean(8, c.getMarried());
 
-            pstmt.setString(9, c.getClass().getSimpleName());
+            pstmt.setString(9, c.getType());
 
             if (c instanceof VIP) {
                 pstmt.setInt(10, ((VIP) c).getDiscount());
