@@ -234,6 +234,10 @@ public class Customer {
         this.status = status;
     }
 
+    public String getType() {
+        return "Customer";
+    }
+
     private static final String ID_PATTERN = "[A-Z][12][0-9]{8}";
     private static final String firstCharString = "ABCDEFGHJKLMNPQRSTUVXYWZIO";
 
