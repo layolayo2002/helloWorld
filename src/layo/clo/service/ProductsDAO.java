@@ -832,27 +832,29 @@ public class ProductsDAO {
         }
     }
     private static final String ADD_COLOR = "INSERT INTO color (color) VALUES (?)";
+    private static final String CHECK_COLOR_EXISTS = "SELECT COUNT(*) FROM color WHERE color = ?";
 
     public void addColor(String color) throws CLOException {
         if (color == null) {
             throw new IllegalArgumentException("顏色資料不得為空");
         }
 
-        try (Connection connection = RDBConnection.getConnection(); //1, 2. 取得Connection
-                PreparedStatement pstmt = connection.prepareStatement(ADD_COLOR); //3. 準備指令                
-                ) {
-            //3.1 傳入?的值
-            List<String> totalColor = getTotalColor();
-            for (String colors : totalColor) {
-                if (color.equals(colors)) {
-                    throw new CLOException("已有該顏色");
+        try (Connection connection = RDBConnection.getConnection()) {
+            // Check if color already exists using a single query
+            try (PreparedStatement checkStmt = connection.prepareStatement(CHECK_COLOR_EXISTS)) {
+                checkStmt.setString(1, color);
+                try (ResultSet rs = checkStmt.executeQuery()) {
+                    if (rs.next() && rs.getInt(1) > 0) {
+                        throw new CLOException("已有該顏色");
+                    }
                 }
             }
 
-            pstmt.setString(1, color);
-
-            //4. 執行指令
-            pstmt.executeUpdate();
+            // Insert the new color
+            try (PreparedStatement pstmt = connection.prepareStatement(ADD_COLOR)) {
+                pstmt.setString(1, color);
+                pstmt.executeUpdate();
+            }
 
         } catch (CLOException ex) {
             throw new CLOException("" + ex);
