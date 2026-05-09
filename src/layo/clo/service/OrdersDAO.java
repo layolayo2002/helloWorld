@@ -10,6 +10,7 @@ import layo.clo.entity.CLOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import layo.clo.entity.Customer;
@@ -44,13 +45,16 @@ public class OrdersDAO {
             try {
                 //先更改庫存
                 ProductService pservice = new ProductService();
+                ProductsDAO pdao = new ProductsDAO();
+                Map<String, Integer> colorMap = pdao.getAllColorMap();
+                Map<String, Integer> sizeMap = pdao.getAllSizeMap();
 
                 for (OrderItem item : order.getOrderItemSet()) {
                     pstmt0.setInt(1, item.getQuantity());
                     pstmt0.setInt(2, item.getProduct().getId());
                     pstmt0.setInt(3, item.getQuantity());
-                    pstmt0.setInt(4, pservice.getColorNo(item.getProduct().getColor()));       
-                    pstmt0.setInt(5, pservice.getSizeNo(item.getProduct().getSize()));
+                    pstmt0.setInt(4, colorMap.get(item.getProduct().getColor()));       
+                    pstmt0.setInt(5, sizeMap.get(item.getProduct().getSize()));
                     int row = pstmt0.executeUpdate();
                     if (row < 1) {
                         throw new CLOException("產品庫存量不足",item.getProduct());
