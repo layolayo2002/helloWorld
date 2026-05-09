@@ -10,8 +10,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -949,6 +951,43 @@ public class ProductsDAO {
             throw new CLOException("更新商品失敗", ex);
         }
 
+    }
+
+    private static final String GET_ALL_COLORS = "SELECT idcolor, color FROM color";
+    private static final String GET_ALL_SIZES = "SELECT idsize, size FROM size";
+
+    public Map<String, Integer> getAllColorMap() throws CLOException {
+        try (Connection connection = RDBConnection.getConnection();
+                PreparedStatement pstmt = connection.prepareStatement(GET_ALL_COLORS);
+                ResultSet rs = pstmt.executeQuery()) {
+            
+            Map<String, Integer> colorMap = new HashMap<>();
+            while (rs.next()) {
+                colorMap.put(rs.getString("color"), rs.getInt("idcolor"));
+            }
+            return colorMap;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE,
+                    "查詢所有顏色失敗", ex);
+            throw new CLOException("查詢所有顏色失敗", ex);
+        }
+    }
+
+    public Map<String, Integer> getAllSizeMap() throws CLOException {
+        try (Connection connection = RDBConnection.getConnection();
+                PreparedStatement pstmt = connection.prepareStatement(GET_ALL_SIZES);
+                ResultSet rs = pstmt.executeQuery()) {
+            
+            Map<String, Integer> sizeMap = new HashMap<>();
+            while (rs.next()) {
+                sizeMap.put(rs.getString("size"), rs.getInt("idsize"));
+            }
+            return sizeMap;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductsDAO.class.getName()).log(Level.SEVERE,
+                    "查詢所有尺寸失敗", ex);
+            throw new CLOException("查詢所有尺寸失敗", ex);
+        }
     }
 
 }
