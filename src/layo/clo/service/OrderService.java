@@ -55,11 +55,12 @@ public class OrderService {
     
     public void sendPaid(int orderId, String customerId, String bank, String lastCode, double amount, String transDateTime) 
             throws CLOException{
-        String paymentNote="轉帳銀行: " + bank;
-        paymentNote+=", 後5碼: " + lastCode;
-        paymentNote+=", 金額: " + transDateTime;
-        paymentNote+=", 時間: " + transDateTime;
-        dao.sendPaid(orderId, customerId, paymentNote);
+        StringBuilder paymentNote = new StringBuilder("轉帳銀行: ")
+            .append(bank)
+            .append(", 後5碼: ").append(lastCode)
+            .append(", 金額: ").append(amount)
+            .append(", 時間: ").append(transDateTime);
+        dao.sendPaid(orderId, customerId, paymentNote.toString());
     }
     
     
