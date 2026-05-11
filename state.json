@@ -1,146 +1,25 @@
 {
-  "last_run": "2026-05-10T23:36:08Z",
-  "workflow_run_id": "25642871630",
-  "tasks_completed": [1, 4, 7],
-  "tasks_todo": [2, 3, 5, 6],
-  "current_work": {
-    "task": null,
-    "status": "idle"
-  },
-  "pr_status": {
-    "pr_6": {
-      "title": "[Efficiency Improver] Optimize ShoppingCart HashMap access patterns",
-      "status": "open_draft",
-      "ci_passing": true,
-      "tests": "all passing",
-      "mergeable_state": "clean",
-      "created": "2026-04-23T19:51:25Z",
-      "last_verified": "2026-05-10T23:36:08Z",
-      "notes": "17+ days since creation. Awaiting human review. Tests verified passing. No conflicts."
-    },
-    "pr_10": {
-      "title": "[Efficiency Improver] Optimize RDBConnection JDBC driver initialization",
-      "status": "open_draft",
-      "ci_passing": true,
-      "tests": "all passing",
-      "mergeable_state": "clean",
-      "created": "2026-04-24T23:30:07Z",
-      "last_verified": "2026-05-10T23:36:08Z",
-      "notes": "15+ days since creation. Awaiting human review. Tests verified passing. No conflicts."
-    },
-    "pr_22": {
-      "title": "[Efficiency Improver] Optimize Customer type caching - eliminate reflection overhead",
-      "status": "open_draft",
-      "ci_passing": true,
-      "tests": "all passing",
-      "mergeable_state": "clean",
-      "created": "2026-05-02T23:28:04Z",
-      "last_verified": "2026-05-10T23:36:08Z",
-      "notes": "8 days since creation. Awaiting human review. Tests verified passing. No conflicts."
-    },
-    "pr_24": {
-      "title": "[Efficiency Improver] Optimize ProductsDAO.addColor() - eliminate inefficient duplicate query",
-      "status": "open_draft",
-      "ci_passing": true,
-      "tests": "all passing",
-      "mergeable_state": "clean",
-      "created": "2026-05-03T23:35:44Z",
-      "last_verified": "2026-05-10T23:36:08Z",
-      "notes": "7 days since creation. Awaiting human review. Tests verified passing. No conflicts."
-    },
-    "pr_31": {
-      "title": "[Efficiency Improver] Optimize OrdersDAO.insert() - eliminate N+1 query problem",
-      "status": "open_draft",
-      "ci_passing": true,
-      "tests": "all passing",
-      "mergeable_state": "clean",
-      "created": "2026-05-09T23:47:05Z",
-      "last_verified": "2026-05-10T23:36:08Z",
-      "notes": "1 day since creation. Awaiting human review. Tests verified passing. No conflicts."
+  "last_run": "2026-05-11T23:41:49Z",
+  "workflow_run_id": "25703876445",
+  "tasks_completed": [2, 3, 7],
+  "tasks_todo": [1, 4, 5, 6],
+  "pr_count": 6,
+  "pr_status_summary": "All 6 PRs open/draft, CI passing, clean mergeable, awaiting human review",
+  "recent_opportunities": [
+    {
+      "id": "string_concat_fix",
+      "title": "OrderService.sendPaid() string concatenation",
+      "status": "pr_32",
+      "notes": "Also fixed bug: line 60 used transDateTime instead of amount parameter"
     }
-  },
-  "issues": {
-    "issue_20_may": {
-      "title": "[Efficiency Improver] Monthly Activity - May 2026",
-      "status": "open",
-      "last_updated": "2026-05-10T23:36:08Z"
-    },
-    "issue_12": {
-      "title": "Establish Energy Measurement Infrastructure for Baseline Metrics",
-      "status": "open",
-      "created": "2026-04-25T23:23:13Z",
-      "task": 6,
-      "last_commented": "2026-05-08T23:43:33Z",
-      "notes": "No new human comments since May 8. Proposes JMH benchmarking suite, test timing collection, profiler integration."
-    }
-  },
-  "monthly_summary": {
-    "issue": 20,
-    "month": "May 2026",
-    "last_updated": "2026-05-10T23:36:08Z"
-  },
-  "next_run_recommendations": [
-    "Round-robin strategy: Task 1 done (May 10), Task 4 done (May 10), Task 7 to complete (May 10)",
-    "Next priority: Task 2 (scan for new opportunities), Task 3 (implement), Task 5 (comment on issues), Task 6 (measurement infrastructure)",
-    "All 5 PRs stable and awaiting human review - no CI work needed on May 10",
-    "No new human activity on PRs or Issue #12 since May 8 - check back after human action"
   ],
   "optimization_pipeline": [
-    {
-      "id": "shopping_cart",
-      "title": "ShoppingCart optimization",
-      "priority": "HIGH",
-      "impact": "15-20% instruction reduction",
-      "status": "pr_6",
-      "notes": "HashMap access pattern fix + operator correction"
-    },
-    {
-      "id": "connection_loading",
-      "title": "RDBConnection static driver loading",
-      "priority": "MEDIUM",
-      "impact": "5-10% CPU reduction",
-      "status": "pr_10",
-      "notes": "Move Class.forName to static initializer"
-    },
-    {
-      "id": "reflection_caching",
-      "title": "Customer type caching - eliminate reflection",
-      "priority": "MEDIUM",
-      "impact": "5-10% CPU reduction",
-      "status": "pr_22",
-      "notes": "Replace getClass().getSimpleName() with getType() method"
-    },
-    {
-      "id": "addcolor_optimization",
-      "title": "ProductsDAO.addColor() duplicate query fix",
-      "priority": "HIGH",
-      "impact": "50-80% query time, 99% network reduction",
-      "status": "pr_24",
-      "notes": "Single COUNT query instead of full-table scan + O(n) loop"
-    },
-    {
-      "id": "orders_n1_fix",
-      "title": "OrdersDAO.insert() N+1 query elimination",
-      "priority": "HIGH",
-      "impact": "98% query reduction, 30-50% energy savings",
-      "status": "pr_31",
-      "notes": "Pre-fetch color/size mappings once instead of per-item database calls"
-    },
-    {
-      "id": "connection_pooling",
-      "title": "Database Connection Pooling",
-      "priority": "MEDIUM",
-      "impact": "10-20% energy savings on database workloads",
-      "status": "pending_review",
-      "notes": "Requires new dependency (HikariCP). Should propose in issue after PRs merged."
-    },
-    {
-      "id": "eager_initialization",
-      "title": "Eager entity initialization patterns",
-      "priority": "LOW",
-      "impact": "unclear, needs measurement",
-      "status": "identified",
-      "notes": "Potential in entity constructors - need to scan for unnecessary initialization work"
-    }
+    {"id": "shopping_cart", "title": "ShoppingCart optimization", "priority": "HIGH", "status": "pr_6"},
+    {"id": "connection_loading", "title": "RDBConnection static driver loading", "priority": "MEDIUM", "status": "pr_10"},
+    {"id": "reflection_caching", "title": "Customer type caching", "priority": "MEDIUM", "status": "pr_22"},
+    {"id": "addcolor_optimization", "title": "ProductsDAO.addColor() duplicate query", "priority": "HIGH", "status": "pr_24"},
+    {"id": "orders_n1_fix", "title": "OrdersDAO.insert() N+1 query elimination", "priority": "HIGH", "status": "pr_31"},
+    {"id": "string_concat_fix", "title": "OrderService.sendPaid() string concat", "priority": "MEDIUM", "status": "pr_32"},
+    {"id": "connection_pooling", "title": "Database Connection Pooling", "priority": "MEDIUM", "status": "pending"}
   ]
 }
